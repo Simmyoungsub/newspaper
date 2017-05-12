@@ -8,6 +8,7 @@
 <title>Board</title>
 </head>
 <script src="https://code.jquery.com/jquery-3.2.1.js"></script>
+<script type="text/javascript" src="<c:url value="/resources/js/common.js"/>"></script>
 <script type="text/javascript" src="<c:url value="/resources/js/boardRegister.js"/>"></script>
 <style>
 	table{border-collapse: collapse;}
@@ -18,7 +19,7 @@
 		<div>
 			<div>
 				<div>
-					<form>
+					<form enctype="multipart/form-data" class="registerForm">
 						<div>
 							<label for="title">제목</label>
 						</div>
@@ -30,6 +31,12 @@
 						</div>
 						<div>
 							<textarea name="content" id="content" class="content"></textarea>
+						</div>
+						<div>
+							<label for="file">첨부파일</label>
+						</div>
+						<div>
+							<input type="file" name="file" id="file" class="file"/>
 						</div>
 					</form>
 					<div>

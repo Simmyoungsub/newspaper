@@ -3,9 +3,9 @@ package com.spring.board.service;
 public enum Command {
 	
 	GETLIST("getList",""),
-	REGISTERITEM("registerItem",""),
-	UPDATEITEM("registerItem",""),
-	DELETEITEM("registerItem","");
+	REGISTERITEM("registerItem","insert into board value (:title,:content,:writer,:regDate,:file"),
+	UPDATEITEM("updateItem",""),
+	DELETEITEM("deleteItem","");
 	
 	private Command(String key, String command){
 		this.key = key;

@@ -8,6 +8,7 @@
 <title>Board</title>
 </head>
 <script src="https://code.jquery.com/jquery-3.2.1.js"></script>
+<script type="text/javascript" src="<c:url value="/resources/js/common.js"/>"></script>
 <script type="text/javascript" src="<c:url value="/resources/js/board.js"/>"></script>
 <style>
 	table{border-collapse: collapse;}
@@ -21,8 +22,8 @@
 					<button id="registerBtn">등록</button>
 				</div>
 				<div>
-					<table>
-						<tr>
+					<table class="list">
+						<!-- <tr>
 							<th>번호</th>
 							<th>제목</th>
 							<th>작성자</th>
@@ -33,7 +34,7 @@
 							<td>테스트</td>
 							<td>admin</td>
 							<td>2017-05-11</td>
-						</tr>
+						</tr> -->
 					</table>
 				</div>
 			</div>

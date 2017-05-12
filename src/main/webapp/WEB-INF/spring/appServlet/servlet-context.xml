@@ -24,5 +24,9 @@
 	<context:component-scan base-package="com.spring.board" />
 	
 	<beans:bean id="jsonView" class="org.springframework.web.servlet.view.json.MappingJackson2JsonView" />
-		
+	
+	<beans:bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver"> 
+		<beans:property name="maxUploadSize" value="50000" /> 
+	</beans:bean>
+	
 </beans:beans>
