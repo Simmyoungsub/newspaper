@@ -28,7 +28,7 @@ var board = function(){
 		};
 		
 		$.ajax({
-			type : "POST",
+			type : "GET",
 			url : "/getList.json",
 			data : JSON.stringify(param),
 			contentType : "application/json",

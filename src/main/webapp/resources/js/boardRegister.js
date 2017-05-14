@@ -16,8 +16,8 @@ var boardRegister = function(){
 	
 	var addEvent = function(){
 		$registerBtn.on("click",function(){
-			//register();
-			uploadFile();
+			register();
+			//uploadFile();
 		});
 		
 		$registerForm.on("submit",function(){
@@ -36,11 +36,14 @@ var boardRegister = function(){
 				
 		};
 		
+		var formData = new FormData($registerForm[0]);
+		
 		$.ajax({
 			type : "POST",
 			url : "registerItem.json",
-			data : JSON.stringify(param),
-			contentType : "application/json",
+			data : formData,
+			processData : false,
+			contentType : false,
 			dataType : "json",
 			success : function(data){
 				console.log(data);
@@ -60,14 +63,8 @@ var boardRegister = function(){
 		var param = {
 				
 		}
-
+		
 		var formData = new FormData($registerForm[0]);
-		
-//		for(var [key, value] of formData.entries()){
-//			console.log(key, value);
-//		}
-		
-		console.log(formData.file, formData.title);
 		
 		$.ajax({
 			type : "POST",

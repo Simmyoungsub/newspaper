@@ -26,7 +26,18 @@
 	<beans:bean id="jsonView" class="org.springframework.web.servlet.view.json.MappingJackson2JsonView" />
 	
 	<beans:bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver"> 
-		<beans:property name="maxUploadSize" value="50000" /> 
+		<beans:property name="maxUploadSize" value="50000000" /> 
+	</beans:bean>
+	
+	<beans:bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">  
+		<beans:property name="driverClassName" value="com.mysql.jdbc.Driver"/>  
+		<beans:property name="url" value="jdbc:mysql://localhost:3306/newspaper"/>  
+		<beans:property name="username" value="root"/>  
+		<beans:property name="password" value="audtjq12"/>  
+	</beans:bean>  
+	
+	<beans:bean id="jdbcTemplate" class="org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate">
+		<beans:constructor-arg ref="dataSource"/>
 	</beans:bean>
 	
 </beans:beans>
