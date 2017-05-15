@@ -28,7 +28,7 @@ public class FileUtil {
 				}
 				
 				File serverFile = new File(dir.getAbsolutePath() + File.separator+file.getOriginalFilename());
-				
+				FileUtil.logger.info(dir.getAbsolutePath() + File.separator+file.getOriginalFilename());
 				BufferedOutputStream out = new BufferedOutputStream(new FileOutputStream(serverFile));
 				
 				out.write(bytes);

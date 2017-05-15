@@ -4,7 +4,10 @@
 
 var common = function(){
 	var event = this.event = {
-			
+			addEventListener : function(obj,event,callBack){
+				obj.off();
+				obj.on(event,callBack);
+			}
 	};
 	
 	var util = this.util = {
@@ -30,9 +33,21 @@ var common = function(){
 			mm = mm<"10"?"0"+mm : mm;
 			ss = ss<"10"?"0"+ss : ss;
 			
-			return this.getDate()+" "+hh+":"+mm+":"+ss;
+			return this.getDate(date)+" "+hh+":"+mm+":"+ss;
 			
+		},
+		getParameterMap : function(){
+			var parameterMap = {},
+				substr = location.search.substr(1),
+				splitstr = substr.split("&");
+			
+			for(var i=0;i<splitstr.length;i++){
+				var pair = splitstr[i].split("=");
+				
+				parameterMap[pair[0]] = pair[1];
+			}
+			
+			return parameterMap;
 		}
-		
 	};
 };

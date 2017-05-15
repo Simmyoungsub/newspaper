@@ -1,0 +1,11 @@
+thead{border-top:1px solid black;border-bottom:1px solid black;}
+table{border-collapse: collapse;}
+/* table tr td,th{border:1px solid black;} */
+.detailBtn{display:inline-block;}
+.bnoHeader{width:100px;}
+.titleHeader{width:250px;}
+.writerHeader{width:100px;}
+.regDateHeader{width:200px;}
+.detailBtnHeader{width:150px;}
+th,td{text-align:left;}
+td{text-overflow: ellipsis; white-space: nowrap; overflow: hidden;}

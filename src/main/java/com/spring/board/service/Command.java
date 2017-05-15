@@ -2,10 +2,11 @@ package com.spring.board.service;
 
 public enum Command {
 	
-	GETLIST("getList",""),
-	REGISTERITEM("registerItem","insert into board value (:title,:content,:writer,:regDate,:file"),
+	GETLIST("getList","select * from newspaper.board"),
+	REGISTERITEM("registerItem","insert into newspaper.board (boardValue,title,content,writer,file,regDate) values (:boardValue,:title,:content,:writer,:file,NOW())"),
 	UPDATEITEM("updateItem",""),
-	DELETEITEM("deleteItem","");
+	DELETEITEM("deleteItem",""),
+	GETITEM("getItem","select * from newspaper.board where bno = :bno and boardValue = :boardValue");
 	
 	private Command(String key, String command){
 		this.key = key;

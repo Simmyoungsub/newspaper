@@ -10,13 +10,17 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
+import com.spring.board.BoardConstant;
 import com.spring.board.service.BoardService;
 import com.spring.board.service.Command;
+import com.spring.board.util.DateUtil;
 import com.spring.board.util.FileUtil;
+import com.spring.board.util.UUIDUtil;
 
 @Controller
 public class BoardController {
@@ -28,11 +32,26 @@ public class BoardController {
 	
 	@RequestMapping(value="/getList.json", method=RequestMethod.GET)
 	@ResponseBody
-	public Map<String,Object> getList(@RequestBody Map<String,Object>reqMap) throws RuntimeException{
+	public Map<String,Object> getList(Map<String,Object>reqMap) throws RuntimeException{
 		Map<String,Object> resMap = null;
-		
+
 		try{
 			resMap = this.boardService.call(Command.GETLIST, reqMap);
+		}catch(Exception e){
+			throw new RuntimeException();
+		}
+		
+		return resMap;
+	}
+	
+	@RequestMapping(value="/getItem.json", method=RequestMethod.GET)
+	@ResponseBody
+	public Map<String,Object> getItem(@RequestParam Map<String,Object>reqMap) throws RuntimeException{
+		Map<String,Object> resMap = null;
+
+		try{
+			this.logger.info(reqMap.toString());
+			resMap = this.boardService.call(Command.GETITEM, reqMap);
 		}catch(Exception e){
 			throw new RuntimeException();
 		}
@@ -47,10 +66,10 @@ public class BoardController {
 		Map<String,Object> reqMap = getParamterMap(request);
 		
 		try{
-			
+			this.logger.info(reqMap.toString());
 			resMap = this.boardService.execute(Command.REGISTERITEM, reqMap);
 			
-			if(reqMap.containsKey("fileName")){
+			if(reqMap.containsKey("file")){
 				MultipartFile file = request.getFile("file");
 				FileUtil.saveFile(file);
 			}
@@ -105,15 +124,30 @@ public class BoardController {
 	public Map<String,Object> getParamterMap(MultipartHttpServletRequest request){
 		Map<String,Object> map = new HashMap<String,Object>();
 		
-		map.put("title", request.getParameter("title"));
-		map.put("content", request.getParameter("content"));
-		
+		map.put("title", request.getParameter("title").toString());
+		map.put("content", request.getParameter("content").toString());
+		map.put("writer", "admin");
+		map.put("boardValue", UUIDUtil.getHashValue(BoardConstant.getSalt(),DateUtil.getYYYYMMDD()));
 		MultipartFile file = request.getFile("file");
 		
 		if(!file.isEmpty()){
-			map.put("fileName", file.getOriginalFilename());
+			map.put("file", file.getOriginalFilename().toString());
+		}else{
+			map.put("file", null);
 		}
 		
 		return map;
 	}
+	
+//	private Map<String,Object> setListParameter(Map<String,Object>reqMap){
+//		if(!reqMap.containsKey("bno")){
+//			reqMap.put("bno", "");
+//		}
+//		
+//		if(!reqMap.containsKey("boardValue")){
+//			reqMap.put("boardValue", "");
+//		}
+//		
+//		return reqMap;
+//	}
 }

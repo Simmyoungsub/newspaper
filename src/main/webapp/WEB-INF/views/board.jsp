@@ -8,12 +8,9 @@
 <title>Board</title>
 </head>
 <script src="https://code.jquery.com/jquery-3.2.1.js"></script>
+<link rel="stylesheet" href="<c:url value="/resources/css/board.css"/>" type="text/css"/>
 <script type="text/javascript" src="<c:url value="/resources/js/common.js"/>"></script>
 <script type="text/javascript" src="<c:url value="/resources/js/board.js"/>"></script>
-<style>
-	table{border-collapse: collapse;}
-	table tr td,th{border:1px solid black;}
-</style>
 <body>
 	<div>
 		<div>
@@ -23,18 +20,6 @@
 				</div>
 				<div>
 					<table class="list">
-						<!-- <tr>
-							<th>번호</th>
-							<th>제목</th>
-							<th>작성자</th>
-							<th>등록날짜</th>
-						</tr>
-						<tr>
-							<td>1</td>
-							<td>테스트</td>
-							<td>admin</td>
-							<td>2017-05-11</td>
-						</tr> -->
 					</table>
 				</div>
 			</div>

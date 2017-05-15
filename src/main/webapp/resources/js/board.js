@@ -12,6 +12,7 @@ var board = function(){
 		$list = $(".list");
 	
 	this.init = function(){
+		retreive();
 		addEvent();
 	};
 	
@@ -29,7 +30,7 @@ var board = function(){
 		
 		$.ajax({
 			type : "GET",
-			url : "/getList.json",
+			url : "getList.json",
 			data : JSON.stringify(param),
 			contentType : "application/json",
 			dataType : "json",
@@ -52,31 +53,58 @@ var board = function(){
 		if(data === null || data.length === undefined){
 			
 		}else{
+			var tbody = $("<tbody></tbody>");
 			
 			for(var i=0;i<data.length;i++){
 				var tr = $("<tr></tr>"),
 					td = $("<td></td>"),
 					btn = $("<button></button>"),
-					div = $("<div></div>"),
+					div = $("<div></div>").addClass("detailBtn"),
+					a = $("<a></a>"),
 					item = data[i];
 				
-				tr.html(td.clone().html(item["bno"])).append(td.clone.html(item["title"])).append(td.clone.html(item["writer"])).append(self.util.getDateTime(new Date(item["regDate"])))
-				.append(td.clone.html(div.clone().html(btn.clone().html("보기"))).append(div.clone().html(btn.clone().html("수정"))).append(div.clone().html(btn.clone().html("삭제"))));
+				tr.html(td.clone().html(item["bno"])).append(td.clone().html(a.addClass("detailLink").html(item["title"]).attr({
+					"data-bno" : item["bno"],
+					"data-boardValue" : item["boardValue"],
+					"href" : "#"
+				})))
+				.append(td.clone().html(item["writer"])).append(td.clone().html(self.util.getDateTime(new Date(item["regDate"]))))
+				.append(td.clone().html(div.clone().html(btn.clone().html("보기"))).append(div.clone().html(btn.clone().html("수정"))).append(div.clone().html(btn.clone().html("삭제"))));
 				
-				$list.append(tr);
+				tbody.append(tr);
+			}
+			$list.append(tbody);
+			
+			var callBack = function(e){
+				e.preventDefault();
+				
+				var param = {};
+				param = $(this).data();
+				
+				var url = "boardDetail.page?";
+				var idx = 0;
+				
+				for(var key in param){
+					url += idx === 0?key+"="+param[key]:"&"+key+"="+param[key];
+					idx++;
+				}
+				
+				location.href=url;
 			}
 			
-			
+			self.event.addEventListener($(".detailLink"),"click",callBack);
 		}
 	};
 	
 	var getTableHeader = function(){
 		var th = $("<th></th>"),
-			tr = $("<tr></tr>");
+			tr = $("<tr></tr>"),
+			thead = $("<thead></thead>");
 		
-		tr.html(th.clone().html("번호")).append(th.clone().html("제목")).append(th.clone().html("작성자")).append(th.clone().html("날짜")).append(th.clone().html(""));
+		thead.html(tr.html(th.clone().addClass("bnoHeader").html("번호")).append(th.clone().addClass("titleHeader").html("제목")).append(th.clone().addClass("writerHeader").html("작성자"))
+		.append(th.clone().addClass("regDateHeader").html("날짜")).append(th.clone().addClass("detailBtnHeader").html("")));
 		
-		$list.html(tr);
+		$list.html(thead);
 	};
 	
 };
