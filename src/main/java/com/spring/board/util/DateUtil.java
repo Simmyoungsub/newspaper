@@ -6,6 +6,10 @@ public class DateUtil {
 	
 	public static Calendar today = Calendar.getInstance();
 	
+	/**
+	 * YYYYMMDD 형태로 출력
+	 * @return
+	 */
 	public static String getYYYYMMDD(){
 		Calendar today = DateUtil.today;
 		

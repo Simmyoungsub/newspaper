@@ -15,7 +15,10 @@
 	<div>
 		<div>
 			<div>
-				<div class="detailView">
+				<div class="detailView active">
+					<div>
+						<button class="modifyBtn">수정</button>
+					</div>
 					<form>
 						<div class="label">
 							<label>제목</label>
@@ -45,11 +48,11 @@
 							<label>첨부파일</label>
 						</div>
 						<div class="field file">
-							<label class="field viewFile"></label>
+							<a class="link"><label class="field viewFile"></label></a>
 						</div>
 					</form>
 				</div>
-				<div class="detailModfy" style="display:none;">
+				<div class="detailModify">
 					<form>
 						<div>
 							<label for="title">제목</label>
@@ -70,6 +73,14 @@
 							<input type="file" name="file" id="file" class="file"/>
 						</div>
 					</form>
+					<div>
+						<div class="btnWrapper">
+							<button>확인</button>
+						</div>
+						<div class="btnWrapper">
+							<button>취소</button>
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>

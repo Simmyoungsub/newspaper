@@ -8,4 +8,6 @@ table{border-collapse: collapse;}
 .regDateHeader{width:200px;}
 .detailBtnHeader{width:150px;}
 th,td{text-align:left;}
-td{text-overflow: ellipsis; white-space: nowrap; overflow: hidden;}
+td{text-overflow: ellipsis; white-space: nowrap; overflow: hidden;height:2.5em;}
+table{border: 1px solid;}
+tr{border-bottom: 1px solid black;}

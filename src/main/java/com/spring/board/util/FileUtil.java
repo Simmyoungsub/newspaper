@@ -14,6 +14,10 @@ public class FileUtil {
 	
 	private static final Logger logger = LoggerFactory.getLogger(FileUtil.class);
 	
+	/**
+	 * 파일 저장
+	 * @param file
+	 */
 	public static void saveFile(MultipartFile file){
 		
 		if(!file.isEmpty()){
@@ -41,5 +45,19 @@ public class FileUtil {
 		}else{
 			FileUtil.logger.info("file is empty");
 		}
+	}
+	
+	/**
+	 * 저장된 파일 가져오기
+	 * @param fileName
+	 * @return
+	 */
+	public static File getFile(String fileName){
+		String rootPath = System.getProperty("catalina.home");
+		String fullPath = rootPath+File.separator + "tmpFile"+File.separator +fileName;
+		
+		File file = new File(fullPath);
+		
+		return file;
 	}
 }

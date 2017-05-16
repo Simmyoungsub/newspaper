@@ -41,7 +41,7 @@ var board = function(){
 				console.log(xhr);
 			},
 			complete : function(){
-				
+
 			}
 		});
 		
@@ -69,7 +69,7 @@ var board = function(){
 					"href" : "#"
 				})))
 				.append(td.clone().html(item["writer"])).append(td.clone().html(self.util.getDateTime(new Date(item["regDate"]))))
-				.append(td.clone().html(div.clone().html(btn.clone().html("보기"))).append(div.clone().html(btn.clone().html("수정"))).append(div.clone().html(btn.clone().html("삭제"))));
+				.append(td.clone().html(div.clone().html(btn.clone().html("삭제"))));
 				
 				tbody.append(tr);
 			}

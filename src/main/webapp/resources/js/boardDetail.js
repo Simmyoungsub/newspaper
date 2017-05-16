@@ -15,7 +15,10 @@ var boardDetail = function(){
 		$viewContent = $(".viewContent"),
 		$viewRegDate = $(".viewRegDate"),
 		$viewFile = $(".viewFile"),
-		$file = $(".file");
+		$file = $(".file"),
+		$modifyBtn = $(".modifyBtn"),
+		$detailView = $(".detailView"),
+		$detailModify = $(".detailModify");
 	
 	this.init = function(){
 		setParamter();
@@ -28,7 +31,16 @@ var boardDetail = function(){
 	};
 	
 	var addEvent = function(){
+		$modifyBtn.on("click",function(e){
+			
+			$detailView.removeClass("active");
+			$detailModify.addClass("active");
+			
+		});
 		
+		$viewFile.on("click",function(e){
+			downloadFile();
+		});
 	};
 	
 	var retreive = function(){
@@ -69,9 +81,36 @@ var boardDetail = function(){
 				$file.hide();
 			}else{
 				$viewFile.html(item["file"]);
+				$(".link").attr("href","http://192.168.1.170:8080/board/downloadFile.json?fileName="+item["file"]);
 				$file.show();
 			}
 		}
 		
 	};
+	
+	var downloadFile = function(){
+		
+		var param = {
+			"fileName" : $viewFile.text()	
+		};
+		
+//		$.ajax({
+//			type : "GET",
+//			url : "downloadFile.json",
+//			data : param,
+////			contentType:"application/json",
+//			datType : "json",
+//			success : function(data){
+//				console.log(data);
+//			},
+//			error : function(xhr){
+//				console.log(xhr);
+//			},
+//			complete : function(){
+//				
+//			}
+//		});
+		
+	};
+	
 };

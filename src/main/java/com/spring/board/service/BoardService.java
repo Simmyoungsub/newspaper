@@ -18,7 +18,9 @@ public class BoardService implements BoardServiceIn{
 	@Autowired
 	NamedParameterJdbcTemplate jdbcTemplate;
 	
-	//조회
+	/**
+	 * 데이터 조회시 사용
+	 */
 	@Override
 	public Map<String, Object> call(Command command, Map<String, Object> reqMap) {
 		Map<String,Object> resMap = new HashMap<String,Object>();
@@ -27,7 +29,9 @@ public class BoardService implements BoardServiceIn{
 		return resMap;
 	}
 	
-	//수정 
+	/**
+	 * 쿼리 실행
+	 */
 	@Override
 	public Map<String, Object> execute(Command command, Map<String, Object> reqMap) {
 		return this.execute(command.getCommand(), reqMap);

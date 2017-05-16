@@ -1,8 +1,13 @@
 package com.spring.board.controller;
 
+import java.io.File;
+import java.net.URLEncoder;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletResponse;
+
+import org.apache.commons.io.FileUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,6 +35,12 @@ public class BoardController {
 	@Autowired
 	private BoardService boardService;
 	
+	/**
+	 * 게시판 목록 출력
+	 * @param reqMap
+	 * @return
+	 * @throws RuntimeException
+	 */
 	@RequestMapping(value="/getList.json", method=RequestMethod.GET)
 	@ResponseBody
 	public Map<String,Object> getList(Map<String,Object>reqMap) throws RuntimeException{
@@ -44,6 +55,12 @@ public class BoardController {
 		return resMap;
 	}
 	
+	/**
+	 * 게시판 상세화면 데이터 출력
+	 * @param reqMap
+	 * @return
+	 * @throws RuntimeException
+	 */
 	@RequestMapping(value="/getItem.json", method=RequestMethod.GET)
 	@ResponseBody
 	public Map<String,Object> getItem(@RequestParam Map<String,Object>reqMap) throws RuntimeException{
@@ -59,6 +76,12 @@ public class BoardController {
 		return resMap;
 	}
 	
+	/**
+	 * 게시판 항목 등록
+	 * @param request
+	 * @return
+	 * @throws RuntimeException
+	 */
 	@RequestMapping(value="/registerItem.json", method=RequestMethod.POST)
 	@ResponseBody
 	public Map<String,Object> registerItem(MultipartHttpServletRequest request) throws RuntimeException{
@@ -81,13 +104,27 @@ public class BoardController {
 		return resMap;
 	}
 	
+	/**
+	 * 게시판 항목 수정
+	 * @param reqMap
+	 * @return
+	 * @throws RuntimeException
+	 */
 	@RequestMapping(value="/updateItem.json", method=RequestMethod.POST)
 	@ResponseBody
-	public Map<String,Object> updateItem(@RequestBody Map<String,Object>reqMap) throws RuntimeException{
+	public Map<String,Object> updateItem(MultipartHttpServletRequest request) throws RuntimeException{
 		Map<String,Object> resMap = null;
+		Map<String,Object> reqMap = getParamterMap(request);
 		
 		try{
+			this.logger.info(reqMap.toString());
 			resMap = this.boardService.execute(Command.UPDATEITEM, reqMap);
+			
+			if(reqMap.containsKey("file")){
+				MultipartFile file = request.getFile("file");
+				FileUtil.saveFile(file);
+			}
+			
 		}catch(Exception e){
 			throw new RuntimeException();
 		}
@@ -95,6 +132,12 @@ public class BoardController {
 		return resMap;
 	}
 	
+	/**
+	 * 게시판 항목 삭제
+	 * @param reqMap
+	 * @return
+	 * @throws RuntimeException
+	 */
 	@RequestMapping(value="/deleteItem.json", method=RequestMethod.POST)
 	@ResponseBody
 	public Map<String,Object> deleteItem(@RequestBody Map<String,Object>reqMap) throws RuntimeException{
@@ -109,18 +152,43 @@ public class BoardController {
 		return resMap;
 	}
 	
-	@RequestMapping(value="/uploadFile.json", method=RequestMethod.POST)
-	@ResponseBody
-	public String uploadFile(MultipartHttpServletRequest request) throws RuntimeException{
-		Map<String,Object> resMap = null;
+	/**
+	 * 첨부파일 다운로드
+	 * @param fileName
+	 * @param response
+	 * @throws RuntimeException
+	 */
+	@RequestMapping(value="/downloadFile.json", method=RequestMethod.GET)
+	public void downloadFile(@RequestParam("fileName") String fileName, HttpServletResponse response) throws RuntimeException{
+		this.logger.info("fileName : "+fileName);
+		File file = FileUtil.getFile(fileName);
+		this.logger.info("Parameter : {fileName : " + file.toString() + "}");
 		
-		MultipartFile file = request.getFile("file");
+		try{
+			byte fileBytes[] = FileUtils.readFileToByteArray(file);
+			
+			//첨부파일을 다운 받을 수 있게 response Header 설정
+			response.setContentType("application/octet-stream");
+		    response.setContentLength(fileBytes.length);
+		    response.setHeader("Content-Disposition", "attachment; fileName=\"" + URLEncoder.encode(fileName,"UTF-8")+"\";");
+		    response.setHeader("Content-Transfer-Encoding", "binary");
+		    response.getOutputStream().write(fileBytes);
+		     
+		    response.getOutputStream().flush();
+		    response.getOutputStream().close();
+		    
+		    this.logger.info("downloaded file : " + fileName);
+		}catch(Exception e){
+			this.logger.info(e.getMessage());
+		}
 		
-		FileUtil.saveFile(file);
-		
-		return "success";
 	}
 	
+	/**
+	 * 게시판 항목 등록 파라미터 변환
+	 * @param request
+	 * @return
+	 */
 	public Map<String,Object> getParamterMap(MultipartHttpServletRequest request){
 		Map<String,Object> map = new HashMap<String,Object>();
 		
@@ -130,6 +198,7 @@ public class BoardController {
 		map.put("boardValue", UUIDUtil.getHashValue(BoardConstant.getSalt(),DateUtil.getYYYYMMDD()));
 		MultipartFile file = request.getFile("file");
 		
+		//파일 존재 유무
 		if(!file.isEmpty()){
 			map.put("file", file.getOriginalFilename().toString());
 		}else{
@@ -139,15 +208,4 @@ public class BoardController {
 		return map;
 	}
 	
-//	private Map<String,Object> setListParameter(Map<String,Object>reqMap){
-//		if(!reqMap.containsKey("bno")){
-//			reqMap.put("bno", "");
-//		}
-//		
-//		if(!reqMap.containsKey("boardValue")){
-//			reqMap.put("boardValue", "");
-//		}
-//		
-//		return reqMap;
-//	}
 }

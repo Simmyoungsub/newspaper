@@ -5,6 +5,12 @@ import java.security.NoSuchAlgorithmException;
 
 public class UUIDUtil {
 	
+	/**
+	 * UUID 생성
+	 * @param salt
+	 * @param target
+	 * @return
+	 */
 	public static String getHashValue(byte[] salt, String... target) {
 		String generatedPassword = null;
         try {
