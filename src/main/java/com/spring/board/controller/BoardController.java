@@ -161,23 +161,9 @@ public class BoardController {
 	@RequestMapping(value="/downloadFile.json", method=RequestMethod.GET)
 	public void downloadFile(@RequestParam("fileName") String fileName, HttpServletResponse response) throws RuntimeException{
 		this.logger.info("fileName : "+fileName);
-		File file = FileUtil.getFile(fileName);
-		this.logger.info("Parameter : {fileName : " + file.toString() + "}");
 		
 		try{
-			byte fileBytes[] = FileUtils.readFileToByteArray(file);
-			
-			//첨부파일을 다운 받을 수 있게 response Header 설정
-			response.setContentType("application/octet-stream");
-		    response.setContentLength(fileBytes.length);
-		    response.setHeader("Content-Disposition", "attachment; fileName=\"" + URLEncoder.encode(fileName,"UTF-8")+"\";");
-		    response.setHeader("Content-Transfer-Encoding", "binary");
-		    response.getOutputStream().write(fileBytes);
-		     
-		    response.getOutputStream().flush();
-		    response.getOutputStream().close();
-		    
-		    this.logger.info("downloaded file : " + fileName);
+			FileUtil.fileDownload(response, fileName);
 		}catch(Exception e){
 			this.logger.info(e.getMessage());
 		}
