@@ -51,6 +51,25 @@
 							<a class="link"><label class="field viewFile"></label></a>
 						</div>
 					</form>
+					<div>
+						<div>
+							<div class="replyContainer">
+							</div>
+						</div>
+					</div>
+					<div>
+						<div>
+							<div>
+								<label>댓글 내용</label>
+							</div>
+							<div>
+								<textarea id="replyContent"></textarea>
+							</div>
+							<div> 
+								<button id="replyBtn">확인</button>
+							</div>
+						</div>
+					</div>
 				</div>
 				<div class="detailModify">
 					<form>

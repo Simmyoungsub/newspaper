@@ -6,7 +6,9 @@ public enum Command {
 	REGISTERITEM("registerItem","insert into newspaper.board (boardValue,title,content,writer,file,regDate) values (:boardValue,:title,:content,:writer,:file,NOW())"),
 	UPDATEITEM("updateItem","update newspaper.board set title = :title , content = :content , writer = :writer , file = :file where bno = :bno and boardValue = :boardValue"),
 	DELETEITEM("deleteItem","delete from newspaper.board where bno = :bno and boardValue = :boardValue"),
-	GETITEM("getItem","select * from newspaper.board where bno = :bno and boardValue = :boardValue");
+	GETITEM("getItem","select * from newspaper.board where bno = :bno and boardValue = :boardValue"),
+	GETREPLYLIST("getReplyList","select * from newspaper.reply where boardValue = :boardValue"),
+	REGISTERREPLY("registerReply","insert into newspaper.reply (replyValue,boardValue,replyContent,replyWriter) values (:replyValue,:boardValue,:replyContent,:replyWriter)");
 	
 	private Command(String key, String command){
 		this.key = key;

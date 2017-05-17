@@ -1,13 +1,11 @@
 package com.spring.board.controller;
 
-import java.io.File;
-import java.net.URLEncoder;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.commons.io.FileUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -170,6 +168,45 @@ public class BoardController {
 		
 	}
 	
+	@RequestMapping(value="/getReplyList.json", method=RequestMethod.POST)
+	@ResponseBody
+	public Map<String,Object> getReplyList(@RequestBody Map<String,Object> reqMap) throws RuntimeException{
+
+		Map<String,Object> resMap = null;
+		
+		try{
+			this.logger.info(reqMap.toString());
+			resMap = this.boardService.call(Command.GETREPLYLIST, reqMap);
+		}catch(Exception e){
+			throw new RuntimeException();
+		}
+		
+		return resMap;
+		
+	}
+	
+	@RequestMapping(value="/registerReply.json", method=RequestMethod.POST)
+	@ResponseBody
+	public Map<String,Object> registerReply(@RequestBody Map<String,Object> reqMap) throws RuntimeException{
+
+		Map<String,Object> resMap = null;
+		
+		
+		
+		try{
+			
+			reqMap = this.getRegisterReplyParameter(reqMap);
+			
+			this.logger.info(reqMap.toString());
+			resMap = this.boardService.execute(Command.REGISTERREPLY, reqMap);
+		}catch(Exception e){
+			throw new RuntimeException();
+		}
+		
+		return resMap;
+		
+	}
+	
 	/**
 	 * 게시판 항목 등록 파라미터 변환
 	 * @param request
@@ -190,6 +227,18 @@ public class BoardController {
 		}else{
 			map.put("file", null);
 		}
+		
+		return map;
+	}
+	
+	public Map<String,Object> getRegisterReplyParameter(Map<String,Object> reqMap){
+		Map<String,Object> map = null;
+		
+		map = reqMap;
+		
+		map.put("replyWriter", "admin");
+		map.put("replyValue", UUIDUtil.getHashValue(BoardConstant.getSalt(),DateUtil.getYYYYMMDD()));
+		
 		
 		return map;
 	}

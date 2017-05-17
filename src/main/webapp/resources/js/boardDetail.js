@@ -18,7 +18,10 @@ var boardDetail = function(){
 		$file = $(".file"),
 		$modifyBtn = $(".modifyBtn"),
 		$detailView = $(".detailView"),
-		$detailModify = $(".detailModify");
+		$detailModify = $(".detailModify"),
+		$replyContainer = $(".replyContainer"),
+		$replyBtn = $("#replyBtn"),
+		$replyContent = $("#replyContent");
 	
 	this.init = function(){
 		setParamter();
@@ -41,29 +44,38 @@ var boardDetail = function(){
 		$viewFile.on("click",function(e){
 			downloadFile();
 		});
+		
+		$replyBtn.on("click",function(e){
+			registerReply();
+		});
 	};
 	
 	var retreive = function(){
+		retreiveDetail();
+		retreiveReply();
+	};
+	
+	var retreiveDetail = function(){
 		var param = {
-			"bno" : parameterMap["bno"],
-			"boardValue" : parameterMap["boardvalue"]
-		};
-		
-		$.ajax({
-			type : "GET",
-			url : "getItem.json",
-			data : param,
-			datType : "json",
-			success : function(data){
-				displayResult(data.result);
-			},
-			error : function(xhr){
-				console.log(xhr);
-			},
-			complete : function(){
-				
-			}
-		});
+				"bno" : parameterMap["bno"],
+				"boardValue" : parameterMap["boardvalue"]
+			};
+			
+			$.ajax({
+				type : "GET",
+				url : "getItem.json",
+				data : param,
+				datType : "json",
+				success : function(data){
+					displayResult(data.result);
+				},
+				error : function(xhr){
+					console.log(xhr);
+				},
+				complete : function(){
+					
+				}
+			});
 	};
 	
 	var displayResult = function(data){
@@ -88,29 +100,68 @@ var boardDetail = function(){
 		
 	};
 	
-	var downloadFile = function(){
-		
+	var retreiveReply = function(){
 		var param = {
-			"fileName" : $viewFile.text()	
+			"boardValue" : parameterMap["boardvalue"]
 		};
 		
-//		$.ajax({
-//			type : "GET",
-//			url : "downloadFile.json",
-//			data : param,
-////			contentType:"application/json",
-//			datType : "json",
-//			success : function(data){
-//				console.log(data);
-//			},
-//			error : function(xhr){
-//				console.log(xhr);
-//			},
-//			complete : function(){
-//				
-//			}
-//		});
+		$.ajax({
+			type : "POST",
+			url : "getReplyList.json",
+			data : JSON.stringify(param),
+			contentType : "application/json",
+			dataType : "json",
+			success : function(data){
+				displayReplyList(data.result);
+			},
+			error : function(xhr){
+				console.log(xhr);
+			},
+			complete : function(){
+				
+			}
+		});
+	};
+	
+	var displayReplyList = function(data){
+		$replyContainer.html("");
+		
+		if(data === null || data.length === undefined){
+			
+		}else{
+			for(var i=0;i<data.length;i++){
+				var div = $("<div></div>"),
+					item = data[i];
+				
+				var repl = div.clone().html(div.clone().html(item["replyWriter"])).append(div.clone().html(item["replyContent"])).append(div.clone().html(item["replyRegDate"]));
+				
+				$replyContainer.append(repl);
+			}
+		}
 		
 	};
 	
+	var registerReply = function(){
+		var param = {
+			"boardValue" : parameterMap["boardvalue"],
+			"replyContent" : $replyContent.val()
+		};
+		
+		$.ajax({
+			type : "POST",
+			url : "registerReply.json",
+			data : JSON.stringify(param),
+			contentType : "application/json",
+			dataType : "json",
+			success : function(data){
+				retreive();
+			},
+			error : function(xhr){
+				console.lolg(xhr);
+			},
+			complete : function(){
+				
+			}
+		});
+	};
 };
