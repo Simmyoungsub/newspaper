@@ -154,6 +154,7 @@ var boardDetail = function(){
 			contentType : "application/json",
 			dataType : "json",
 			success : function(data){
+				clearForm();
 				retreive();
 			},
 			error : function(xhr){
@@ -163,5 +164,9 @@ var boardDetail = function(){
 				
 			}
 		});
+	};
+	
+	var clearForm = function(){
+		$replyContent.val("");
 	};
 };

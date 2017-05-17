@@ -218,7 +218,7 @@ public class BoardController {
 		map.put("title", request.getParameter("title").toString());
 		map.put("content", request.getParameter("content").toString());
 		map.put("writer", "admin");
-		map.put("boardValue", UUIDUtil.getHashValue(BoardConstant.getSalt(),DateUtil.getYYYYMMDD()));
+		map.put("boardValue", UUIDUtil.getHashValue(BoardConstant.getSalt(),DateUtil.getYYYYMMDDHHMISS()));
 		MultipartFile file = request.getFile("file");
 		
 		//파일 존재 유무
@@ -237,7 +237,7 @@ public class BoardController {
 		map = reqMap;
 		
 		map.put("replyWriter", "admin");
-		map.put("replyValue", UUIDUtil.getHashValue(BoardConstant.getSalt(),DateUtil.getYYYYMMDD()));
+		map.put("replyValue", UUIDUtil.getHashValue(BoardConstant.getSalt(),DateUtil.getYYYYMMDDHHMISS()));
 		
 		
 		return map;
