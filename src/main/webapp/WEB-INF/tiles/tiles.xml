@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE tiles-definitions PUBLIC 
+        "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN" 
+        "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">  
+<tiles-definitions>   
+ 
+<definition name="tilesbase"  template="/WEB-INF/views/layout.jsp">   
+    <!-- <put-attribute name="header" value="/views/header.jsp" />    -->
+    <!-- <put-attribute name="menu" value="/views/menu.jsp" /> -->      
+    <put-attribute name="body" value="" />       
+    <!-- <put-attribute name="footer" value="/views/footer.jsp" /> -->   
+</definition>      
+ 
+ <!-- 컨트롤러에서 리턴해 주는 뷰이름,본예제는 hello  -->
+<definition name="*" extends="tilesbase">    
+    <!-- <put-attribute name="title" value="OracleJava Community, MVC HelloWorld by Tiles" /> -->     
+    <put-attribute name="body" value="/WEB-INF/views/{1}.jsp" />    
+</definition>  
+ 
+</tiles-definitions>
