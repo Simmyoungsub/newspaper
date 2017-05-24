@@ -152,12 +152,18 @@ var boardDetail = function(){
 			
 		}else{
 			for(var i=0;i<data.length;i++){
-				var div = $("<div></div>"),
+				var div = $("<div></div>").addClass("chat-body"),
+					li = $("<li></li>").addClass("left clearfix"),
+					span = $("<span></span>").addClass("chat-img pull-left"),
+					strong = $("<strong></strong>"),
+					small = $("<small></small>").addClass("pull-right text-muted"),
+					icon = $("<i></i>").addClass("fa fa-clock-o fa-fw"),
+					p = $("<p></p>"),
 					item = data[i];
 				
-				var repl = div.clone().html(div.clone().html(item["replyWriter"])).append(div.clone().html(item["replyContent"])).append(div.clone().html(item["replyRegDate"]));
-				
-				$replyContainer.append(repl);
+				//var repl = div.clone().html(div.clone().html(item["replyWriter"])).append(div.clone().html(item["replyContent"])).append(div.clone().html(item["replyRegDate"]));
+				li.html(span).append(div.html(strong.html(item["replyWriter"])).append(small.html(icon).append("시간")).append(p.html(item["replyContent"])));
+				$replyContainer.append(li);
 			}
 		}
 		

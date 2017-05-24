@@ -94,6 +94,47 @@
 	                		</div>
 	                	</div>
 	            	</div>
+	            	<div class="row">
+	            		<div class="col-md-12">
+	            			<div class="panel panel-default">
+	            				<div class="panel-heading">
+	            					댓글
+	            				</div>
+	            				<div class="panel-body">
+			            			<ul class="replyContainer chat-box">
+		                                <li class="left clearfix">
+		                                    <span class="chat-img pull-left">
+		                                        <img src="assets/img/1.png" alt="User" class="img-circle" />
+		                                    </span>
+		                                    <div class="chat-body">                                        
+	                                            <strong >Jack Sparrow</strong>
+	                                            <small class="pull-right text-muted">
+	                                                <i class="fa fa-clock-o fa-fw"></i>12 mins ago
+	                                            </small>                                      
+		                                        <p>
+		                                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur bibendum ornare dolor, quis ullamcorper ligula sodales.
+		                                        </p>
+		                                    </div>
+		                                </li>
+		                             </ul>
+	                             </div>
+                             </div>
+	            		</div>
+	            	</div>
+	            	<div class="row">
+	                    <div class="col-md-12">
+	                    	<h3>댓글 작성</h3>
+		                    <form role="form" enctype="multipart/form-data" class="registerForm">
+		                        <div class="form-group">
+		                            <label for="content"></label>
+		                            <textarea class="content form-control" rows="10" name="replyContent" id="replyContent"></textarea>
+		                        </div>
+		                     </form>
+		                     <div>
+		                     	<a href="#" id="replyBtn" class="replyBtn btn btn-primary">등록</a>
+		                     </div>
+	                    </div>
+	                </div>
 				</div>
 				<div class="detailModify">
 					<div class="row">
