@@ -2,7 +2,7 @@ package com.spring.board.service;
 
 public enum Command {
 	
-	GETLIST("getList","select * from newspaper.board"),
+	GETLIST("getList","SELECT * FROM newspaper.board order by regDate desc"),
 	REGISTERITEM("registerItem","insert into newspaper.board (boardValue,title,content,writer,file) values (:boardValue,:title,:content,:writer,:file)"),
 	UPDATEITEM("updateItem","update newspaper.board set title = :title , content = :content , writer = :writer , file = :file where bno = :bno and boardValue = :boardValue"),
 	DELETEITEM("deleteItem","delete from newspaper.board where bno = :bno and boardValue = :boardValue"),

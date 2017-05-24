@@ -216,8 +216,9 @@ public class BoardController {
 	public Map<String,Object> getParamterMap(MultipartHttpServletRequest request){
 		Map<String,Object> map = new HashMap<String,Object>();
 		
-		map.put("title", request.getParameter("title").toString());
-		map.put("content", request.getParameter("content").toString());
+		for(Object key : request.getParameterMap().keySet()){
+			map.put(key.toString(), request.getParameter(key.toString()).toString());
+		}
 		map.put("writer", "admin");
 		map.put("boardValue", UUIDUtil.getHashValue(BoardConstant.getSalt(),DateUtil.getYYYYMMDDHHMISS()));
 		MultipartFile file = request.getFile("file");
@@ -240,11 +241,15 @@ public class BoardController {
 	public Map<String,Object> getUpdateParamterMap(MultipartHttpServletRequest request){
 		Map<String,Object> map = new HashMap<String,Object>();
 		
-		map.put("title", request.getParameter("title").toString());
-		map.put("content", request.getParameter("content").toString());
+		for(Object key : request.getParameterMap().keySet()){
+			map.put(key.toString(), request.getParameter(key.toString()).toString());
+		}
+		
+		//map.put("title", request.getParameter("title").toString());
+		//map.put("content", request.getParameter("content").toString());
 		map.put("writer", "admin");
-		map.put("bno", request.getParameter("bno").toString());
-		map.put("boardValue", UUIDUtil.getHashValue(BoardConstant.getSalt(),DateUtil.getYYYYMMDDHHMISS()));
+		//map.put("bno", request.getParameter("bno").toString());
+		//map.put("boardValue", UUIDUtil.getHashValue(BoardConstant.getSalt(),DateUtil.getYYYYMMDDHHMISS()));
 		MultipartFile file = request.getFile("file");
 		
 		//파일 존재 유무
