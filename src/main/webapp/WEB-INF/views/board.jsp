@@ -6,13 +6,6 @@
 	<div>
 		<div>
 			<div>
-				<!-- <div>
-					<button id="registerBtn">등록</button>
-				</div>
-				<div>
-					<table class="list">
-					</table>
-				</div> -->
 				<div class="row">
 	                <div class="col-md-12">
 	                    <div class="panel panel-default">

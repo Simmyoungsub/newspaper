@@ -14,7 +14,6 @@
  
  <!-- 컨트롤러에서 리턴해 주는 뷰이름,본예제는 hello  -->
 <definition name="*" extends="tilesbase">    
-    <!-- <put-attribute name="title" value="OracleJava Community, MVC HelloWorld by Tiles" /> -->     
     <put-attribute name="body" value="/WEB-INF/views/{1}.jsp" />    
 </definition>  
  
