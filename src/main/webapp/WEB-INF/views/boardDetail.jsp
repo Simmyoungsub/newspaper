@@ -16,7 +16,7 @@
 		<div>
 			<div>
 				<div class="detailView active">
-					<div>
+					<!-- <div>
 						<button class="modifyBtn">수정</button>
 					</div>
 					<form>
@@ -69,37 +69,62 @@
 								<button id="replyBtn">확인</button>
 							</div>
 						</div>
-					</div>
+					</div> -->
+					<div class="row">
+	                    <div class="col-md-12">           
+							<div class="panel panel-back noti-box">
+	                			<span class="icon-box bg-color-blue">
+	                    			<i class="fa fa-warning"></i>
+	               	 			</span>
+	                			<div class="text-box" >
+	                    			<p class="viewTitle main-text"></p>
+	                   	 			<p class="viewWriter text-muted"></p>
+	                    			<p class="viewRegDate text-muted"></p>
+	                    			<hr />
+			                    	<p class="text-muted">
+			                        	 <span class="viewContent text-muted color-bottom-txt"><i class="fa fa-edit"></i>
+			                         	 </span>
+			                   		 </p>
+			                   		 <div class="btnContainer">
+				                   		 <div class="btnWrapper">
+				                   		 	<a href="#" class="modifyBtn btn btn-primary">수정</a>
+				                   		 </div>
+			                   		 </div>
+	                			</div>
+	                		</div>
+	                	</div>
+	            	</div>
 				</div>
 				<div class="detailModify">
-					<form>
-						<div>
-							<label for="title">제목</label>
-						</div>
-						<div>
-							<input type="text" name="title" id="title" class="title">
-						</div>
-						<div>
-							<label for="content">내용</label>
-						</div>
-						<div>
-							<textarea name="content" id="content" class="content"></textarea>
-						</div>
-						<div>
-							<label for="file">첨부파일</label>
-						</div>
-						<div>
-							<input type="file" name="file" id="file" class="file"/>
-						</div>
-					</form>
-					<div>
-						<div class="btnWrapper">
-							<button>확인</button>
-						</div>
-						<div class="btnWrapper">
-							<button>취소</button>
-						</div>
-					</div>
+					<div class="row">
+		                <div class="col-md-12">
+		                    <h3>게시글 수정</h3>
+		                    <form role="form" enctype="multipart/form-data" class="updateForm">
+		                        <div class="form-group">
+		                            <label for="title">제목</label>
+		                            <input class="modifyTitle form-control" placeholder="제목을 입력해주세요." name="title" id="title"/>
+		                        </div>
+		                        <div class="form-group">
+		                            <label for="content">내용</label>
+		                            <textarea class="modifyContent form-control" rows="10" name="content" id="content"></textarea>
+		                        </div>
+		                        <div class="form-group">
+		                            <label for="file">첨부 파일</label>
+		                            <input type="file"  name="file" id="file" class="modifyFile"/>
+		                        </div>
+		                        <input type="hidden" name="bno" class="bno" value="" />
+		                        <input type="hidden" name="boardValue" class="boardValue" value="" />
+		                   	</form>
+		                   	<div class="btnContainer">
+								<div style="display:inline-block;" class="btnWrapper">
+									<a id="" class="btn btn-default">취소</a>
+								</div>
+								<div style="display:inline-block;" class="btnWrapper">
+									<a id="updateBtn" class="btn btn-primary">수정</a>
+								</div>
+							</div>
+		               	</div>
+	            	</div>
 				</div>
 			</div>
 		</div>

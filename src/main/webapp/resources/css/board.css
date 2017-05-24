@@ -1,13 +1,15 @@
 thead{border-top:1px solid black;border-bottom:1px solid black;}
 table{border-collapse: collapse;}
 /* table tr td,th{border:1px solid black;} */
-.detailBtn{display:inline-block;}
+.detailBtn{display:inline-block;text-align: center;width:100%;}
+.detailBtn a{width:80%;}
 .bnoHeader{width:100px;}
 .titleHeader{width:250px;}
 .writerHeader{width:100px;}
 .regDateHeader{width:200px;}
-.detailBtnHeader{width:150px;}
-th,td{text-align:left;}
+.detailBtnHeader{width:150px;text-align:center;}
+.detailBtnHeader a{width:80%;}
+th,td{text-align:left;vertical-align: middle !important;}
 td{text-overflow: ellipsis; white-space: nowrap; overflow: hidden;height:2.5em;}
 table{border: 1px solid;}
 tr{border-bottom: 1px solid black;}

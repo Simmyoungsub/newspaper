@@ -21,7 +21,14 @@ var boardDetail = function(){
 		$detailModify = $(".detailModify"),
 		$replyContainer = $(".replyContainer"),
 		$replyBtn = $("#replyBtn"),
-		$replyContent = $("#replyContent");
+		$replyContent = $("#replyContent"),
+		$modifyTitle = $(".modifyTitle"),
+		$modifyContent = $(".modifyContent"),
+		$modifyFile = $(".modifyFile"),
+		$updateBtn = $("#updateBtn"),
+		$updateForm = $(".updateForm"),
+		$bno = $(".bno"),
+		$boardValue = $(".boardValue");
 	
 	this.init = function(){
 		setParamter();
@@ -35,9 +42,13 @@ var boardDetail = function(){
 	
 	var addEvent = function(){
 		$modifyBtn.on("click",function(e){
+			e.preventDefault();
 			
 			$detailView.removeClass("active");
 			$detailModify.addClass("active");
+			
+			$bno.val(parameterMap["bno"]);
+			$boardValue.val(parameterMap["boardvalue"]);
 			
 		});
 		
@@ -46,7 +57,15 @@ var boardDetail = function(){
 		});
 		
 		$replyBtn.on("click",function(e){
+			e.preventDefault();
+			
 			registerReply();
+		});
+		
+		$updateBtn.on("click",function(e){
+			e.preventDefault();
+			
+			updateItem();
 		});
 	};
 	
@@ -87,7 +106,10 @@ var boardDetail = function(){
 			$viewTitle.html(item["title"]),
 			$viewWriter.html(item["writer"]),
 			$viewContent.html(item["content"]),
-			$viewRegDate.html(item["regDate"]);
+			$viewRegDate.html(self.util.getDateTime(new Date(item["regDate"])));
+			
+			$modifyTitle.val(item["title"]);
+			$modifyContent.val(item["content"]);
 			
 			if(item["file"] === undefined || item["file"] === null){
 				$file.hide();
@@ -168,5 +190,35 @@ var boardDetail = function(){
 	
 	var clearForm = function(){
 		$replyContent.val("");
+	};
+	
+	var updateItem = function(){
+		
+		var params = {};
+		
+		var formData = new FormData($updateForm[0]);
+		
+		$.ajax({
+			type : "POST",
+			url : "updateItem.json",
+			data : formData,
+			dataType : "json",
+			processData : false,
+			contentType : false,
+			success : function(data){
+				if(data.result === "success"){
+					alert("수정이 완료되었습니다.");
+				}else{
+					alert("수정하는 도중에 오류가 발생하였습니다.");
+				}
+				window.location.reload();
+			},
+			error : function(xhr){
+				console.log(xhr);
+			},
+			complete : function(){
+				
+			}
+		});
 	};
 };

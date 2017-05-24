@@ -112,9 +112,10 @@ public class BoardController {
 	@ResponseBody
 	public Map<String,Object> updateItem(MultipartHttpServletRequest request) throws RuntimeException{
 		Map<String,Object> resMap = null;
-		Map<String,Object> reqMap = getParamterMap(request);
+		Map<String,Object> reqMap = getUpdateParamterMap(request);
 		
 		try{
+			this.logger.info("{}",reqMap.toString());
 			this.logger.info(reqMap.toString());
 			resMap = this.boardService.execute(Command.UPDATEITEM, reqMap);
 			
@@ -218,6 +219,31 @@ public class BoardController {
 		map.put("title", request.getParameter("title").toString());
 		map.put("content", request.getParameter("content").toString());
 		map.put("writer", "admin");
+		map.put("boardValue", UUIDUtil.getHashValue(BoardConstant.getSalt(),DateUtil.getYYYYMMDDHHMISS()));
+		MultipartFile file = request.getFile("file");
+		
+		//파일 존재 유무
+		if(!file.isEmpty()){
+			map.put("file", file.getOriginalFilename().toString());
+		}else{
+			map.put("file", null);
+		}
+		
+		return map;
+	}
+	
+	/**
+	 * 게시판 항목 수정 파라미터 변환
+	 * @param request
+	 * @return
+	 */
+	public Map<String,Object> getUpdateParamterMap(MultipartHttpServletRequest request){
+		Map<String,Object> map = new HashMap<String,Object>();
+		
+		map.put("title", request.getParameter("title").toString());
+		map.put("content", request.getParameter("content").toString());
+		map.put("writer", "admin");
+		map.put("bno", request.getParameter("bno").toString());
 		map.put("boardValue", UUIDUtil.getHashValue(BoardConstant.getSalt(),DateUtil.getYYYYMMDDHHMISS()));
 		MultipartFile file = request.getFile("file");
 		

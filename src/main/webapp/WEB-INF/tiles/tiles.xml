@@ -4,9 +4,10 @@
         "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">  
 <tiles-definitions>   
  
-<definition name="tilesbase"  template="/WEB-INF/views/layout.jsp">   
-    <!-- <put-attribute name="header" value="/views/header.jsp" />    -->
-    <!-- <put-attribute name="menu" value="/views/menu.jsp" /> -->      
+<definition name="tilesbase"  template="/WEB-INF/template/layout.jsp">
+	<put-attribute name="include" value="/WEB-INF/template/include.jsp" />   
+	<put-attribute name="side" value="/WEB-INF/template/side.jsp" />
+    <put-attribute name="header" value="/WEB-INF/template/header.jsp" />   
     <put-attribute name="body" value="" />       
     <!-- <put-attribute name="footer" value="/views/footer.jsp" /> -->   
 </definition>      

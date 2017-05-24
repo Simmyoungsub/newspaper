@@ -211,7 +211,7 @@
     // Initializing ///
 
     $(document).ready(function () {
-        mainApp.main_fun();
+        //mainApp.main_fun();
     });
 
 }(jQuery));

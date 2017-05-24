@@ -1,6 +1,9 @@
 .label{display:inline-block;width:20%;}
 .field{display:inline-block;width:70%;}
-.btnWrapper{display:inline-block;}
 .detailView,.detailModify{display:none;}
 .detailView.active,.detailModify.active{display:block;}
 .detailModify.active input[type='file']{display:block !important;}
+.btnContainer{text-align:right;}
+.btnWrapper{text-align:right;width:15%;display: inline-block;}
+.btnWrapper a{width:100%;}
+

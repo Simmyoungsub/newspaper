@@ -6,13 +6,24 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Board</title>
+<tiles:insertAttribute name="include" />
 </head>
-<script src="https://code.jquery.com/jquery-3.2.1.js"></script>
-<script type="text/javascript" src="<c:url value="/resources/js/common.js"/>"></script>
+<style>
+ body{background: #4D4D4D;}
+</style>
 <body>
 	<div>
-		<tiles:insertAttribute name="body" />
+		<tiles:insertAttribute name="header" />
+	</div>
+	<div>
+		<tiles:insertAttribute name="side" />
+	</div>
+	<div id="page-wrapper" >
+    	<div id="page-inner">
+			<tiles:insertAttribute name="body" />
+		</div>
 	</div>
 </body>
 </html>
