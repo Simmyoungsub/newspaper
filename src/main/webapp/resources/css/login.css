@@ -1,0 +1,5 @@
+@CHARSET "UTF-8";
+
+.btnContainer{text-align:right;}
+.btnWrapper{text-align:right;width:15%;display: inline-block;}
+.btnWrapper a{width:100%;}

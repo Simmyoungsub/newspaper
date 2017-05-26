@@ -5,23 +5,21 @@
 <script type="text/javascript" src="<c:url value="/resources/js/board.js"/>"></script>
 	<div>
 		<div>
-			<div>
-				<div class="row">
-	                <div class="col-md-12">
-	                    <div class="panel panel-default">
-	                        <div class="panel-heading">
-	                             	DashBoard
-	                        </div>
-	                        <div class="panel-body">
-	                            <div class="table-responsive">
-	                                <table class="list table table-striped table-bordered table-hover" id="dataTables-example">
-	                                </table>
-	                            </div>
-	                        </div>
-	                    </div>
-	                </div>
-            	</div>
-			</div>
+			<div class="row">
+                <div class="col-md-12">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                             	DashBoard
+                        </div>
+                        <div class="panel-body">
+                            <div class="table-responsive">
+                                <table class="list table table-striped table-bordered table-hover" id="dataTables-example">
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+           	</div>
 		</div>
 	</div>
 <script>
