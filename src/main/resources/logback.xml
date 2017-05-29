@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+    <!-- FILE Appender -->
+    <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <!-- 일자별로 로그파일 적용하기 -->
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>../logs/board_log_%d{yyyy-MM-dd}</fileNamePattern>
+            <maxHistory>60</maxHistory> <!-- 일자별 백업파일의 보관기간 -->
+        </rollingPolicy>
+        <encoder>
+            <pattern>%d{yyyy-MM-dd HH:mm:ss} [%-4p] %p [%F]%M\(%L\) : %m%n</pattern>
+        </encoder>
+    </appender>
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+      <layout class="ch.qos.logback.classic.PatternLayout">
+        <pattern>%d{yyyy-MM-dd HH:mm:ss} [%-4p] %p [%F]%M\(%L\) : %m%n</pattern>
+      </layout>
+    </appender>
+    
+    <!-- TRACE > DEBUG > INFO > WARN > ERROR, 대소문자 구분 안함 -->
+    <root level="INFO">
+      <appender-ref ref="FILE" />
+      <appender-ref ref="STDOUT" />
+    </root>
+</configuration>

@@ -10,11 +10,20 @@
     <put-attribute name="header" value="/WEB-INF/template/header.jsp" />   
     <put-attribute name="body" value="" />       
     <!-- <put-attribute name="footer" value="/views/footer.jsp" /> -->   
-</definition>      
+</definition>
+<definition name="tilesbase2"  template="/WEB-INF/template/layout2.jsp">
+	<put-attribute name="include" value="/WEB-INF/template/include.jsp" />
+	<put-attribute name="header" value="/WEB-INF/template/header.jsp" />   
+    <put-attribute name="body" value="" />       
+</definition>       
+
+<definition name="login" extends="tilesbase2">
+    <put-attribute name="body" value="/WEB-INF/views/login.jsp" />    
+</definition> 
  
  <!-- 컨트롤러에서 리턴해 주는 뷰이름,본예제는 hello  -->
-<definition name="*" extends="tilesbase">    
+<definition name="*" extends="tilesbase">
     <put-attribute name="body" value="/WEB-INF/views/{1}.jsp" />    
-</definition>  
+</definition>
  
 </tiles-definitions>

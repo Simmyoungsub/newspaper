@@ -21,6 +21,7 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import com.spring.board.BoardConstant;
 import com.spring.board.service.BoardService;
 import com.spring.board.service.Command;
+import com.spring.board.service.LoginService;
 import com.spring.board.util.DateUtil;
 import com.spring.board.util.FileUtil;
 import com.spring.board.util.UUIDUtil;
@@ -32,7 +33,8 @@ public class BoardController {
 	
 	@Autowired
 	private BoardService boardService;
-	
+	@Autowired
+	private LoginService loginService;
 	/**
 	 * 게시판 목록 출력
 	 * @param reqMap
@@ -202,6 +204,28 @@ public class BoardController {
 			resMap = this.boardService.execute(Command.REGISTERREPLY, reqMap);
 		}catch(Exception e){
 			throw new RuntimeException();
+		}
+		
+		return resMap;
+		
+	}
+	
+	@RequestMapping(value="/login.json", method=RequestMethod.POST)
+	@ResponseBody
+	public Map<String,Object> login(HttpServletRequest request,@RequestBody Map<String,Object> reqMap) throws RuntimeException{
+
+		Map<String,Object> resMap = null;
+		
+		try{
+			
+			this.logger.info(reqMap.toString());
+			resMap = this.loginService.login(request,reqMap);
+			this.logger.info(resMap.toString());
+		}catch(Exception e){
+			this.logger.info(e.getMessage());
+			resMap = new HashMap<String,Object>();
+			resMap.put("result", false);
+			resMap.put("msg", e.getMessage());
 		}
 		
 		return resMap;

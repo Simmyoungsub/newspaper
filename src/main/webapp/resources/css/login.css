@@ -3,3 +3,5 @@
 .btnContainer{text-align:right;}
 .btnWrapper{text-align:right;width:15%;display: inline-block;}
 .btnWrapper a{width:100%;}
+#page-wrapper{margin: 0;position: absolute;top: 40%;left: 40%;width: 500px	;height:300px;margin: -70px 0 0 -80px;min-height:200px !important;min-height:200px;}
+#page-inner{min-height:inherit;}

@@ -4,7 +4,7 @@
 <link rel="stylesheet" href="<c:url value="/resources/css/login.css"/>" type="text/css"/>
 <script type="text/javascript" src="<c:url value="/resources/js/login.js"/>"></script>
 <div>
-	<div>
+	<div class="rowWrapper">
 		<div class="row">
             <div class="col-md-12">
 				<form role="form">
@@ -19,7 +19,7 @@
                 </form>
                 <div class="btnContainer">
                 	<div class="btnWrapper">
-                		<a href="#" class="btn btn-primary">로그인</a>
+                		<a href="#" id="loginBtn" class="btn btn-primary">로그인</a>
                 	</div>
                 	<div class="btnWrapper">
                 		<a href="#" class="btn btn-primary">취소</a>
@@ -32,8 +32,8 @@
 <script>
 
 $(document).ready(function(){
-	//var b = new board();
-	//b.init();
+	var b = new board_login();
+	b.init();
 });
 
 </script>
