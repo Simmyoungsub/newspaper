@@ -39,8 +39,33 @@
 				</ul>
 			</li> -->
 			<li>
-				<a href="#"><i class="fa fa-square-o fa-3x"></i>Blank Page</a>
+				<a id="logout" href="#"><i class="fa fa-square-o fa-3x"></i>Blank Page</a>
 			</li>
 		</ul>
 	</div>
 </nav>
+<script>
+	$(document).ready(function(){
+		$("#logout").on("click",function(e){
+			e.preventDefault();
+			
+			$.ajax({
+				type : "POST",
+				url : "logout.json",
+				data : JSON.stringify({}),
+				contentType : "application/json",
+				dataType : "json",
+				success : function(data){
+					location.href="login.page";					
+				},
+				error : function(xhr){
+					console.log(xhr);
+				},
+				complete : function(){
+					
+				}
+			});
+		});
+		
+	});
+</script>

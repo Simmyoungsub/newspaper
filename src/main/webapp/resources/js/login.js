@@ -39,6 +39,7 @@ var board_login = function(){
 			dataType : "json",
 			success : function(data){
 				console.log(data);
+				location.href="board.page";
 			},
 			error : function(xhr){
 				console.log(xhr);

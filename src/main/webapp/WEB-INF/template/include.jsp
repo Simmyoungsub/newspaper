@@ -23,3 +23,5 @@
 <script src="<c:url value="/resources/css/bs-binary-admin/assets/js/morris/morris.js"/>"></script>
 <!-- CUSTOM SCRIPTS -->
 <script src="<c:url value="/resources/css/bs-binary-admin/assets/js/custom.js"/>"></script>
+
+<link href="<c:url value="/resources/css/img/favicon.png"/>" rel='shrotcut icon' type='image/x-icon' />

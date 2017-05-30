@@ -232,6 +232,20 @@ public class BoardController {
 		
 	}
 	
+	@RequestMapping(value="/logout.json", method=RequestMethod.POST)
+	@ResponseBody
+	public Map<String,Object> logout(HttpServletRequest request,@RequestBody Map<String,Object> reqMap) throws RuntimeException{
+
+		Map<String,Object> resMap = null;
+		
+		this.logger.info(reqMap.toString());
+		resMap = this.loginService.logout(request,reqMap);
+		this.logger.info(resMap.toString());
+		
+		return resMap;
+		
+	}
+	
 	/**
 	 * 게시판 항목 등록 파라미터 변환
 	 * @param request
