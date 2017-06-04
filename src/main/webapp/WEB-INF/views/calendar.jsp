@@ -5,6 +5,10 @@
 <script type="text/javascript" src="<c:url value="/resources/js/calendar.js"/>"></script>
 	<div>
 		<div>
+			<a href="#" class="prev">이전</a>
+			<a href="#" class="next">다음</a>
+		</div>
+		<div>
 			<div class="row">
                 <table class="result">
                 </table>

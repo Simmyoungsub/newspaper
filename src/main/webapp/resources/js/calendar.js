@@ -7,13 +7,57 @@ var calendar = function(){
 	var self = this;
 	
 	var $result = $(".result"),
-		$ymd = $(".yyyy-mm-dd");
+		$ymd = $(".yyyy-mm-dd"),
+		$prev = $(".prev"),
+		$next = $(".next");
 	
-	var calendarForm = {};
+	var calendarForm = {},
+		currentForm = {};
 	
 	this.init = function(){
 		initCalendarForm();
 		displayResult();
+		addEvent();
+	};
+	
+	var addEvent = function(){
+		
+		$prev.on("click",function(e){
+			 e.preventDefault();
+			 var month = parseInt(calendarForm["month"]),
+			 	 prev = month -1;
+			 
+			 if(prev < 1){
+				 var yyyy = parseInt(calendarForm["year"]);
+				 calendarForm["year"] = "" + (yyyy-1);
+				 month = 12;
+			 }else{
+				 month = prev;
+			 }
+			 
+			 calendarForm["month"] = month<10?"0"+month : "" + month;
+			 
+			 displayResult();
+		});
+		
+		$next.on("click",function(e){
+			e.preventDefault();
+			var month = parseInt(calendarForm["month"]),
+		 	 	next = month +1;
+		 
+			 if(next > 12){
+				 var yyyy = parseInt(calendarForm["year"]);
+				 calendarForm["year"] = "" + (yyyy+1);
+				 month = 1;
+			 }else{
+				 month = next;
+			 }
+			 
+			 calendarForm["month"] = month<10?"0"+month : "" + month;
+			 
+			 displayResult();
+		});
+		
 	};
 	
 	var displayResult = function(){
@@ -72,8 +116,11 @@ var calendar = function(){
 		}
 		
 		var callBack = function(){
-			calendarForm["date"] = $(this).text();
-			$ymd.html(getCalendarString(calendarForm));
+			//calendarForm["date"] = $(this).text();
+			currentForm["year"] = calendarForm["year"];
+			currentForm["month"] = calendarForm["month"];
+			currentForm["date"] = ($(this).text()<10? "0" + $(this).text() : $(this).text());
+			$ymd.html(getCalendarString(currentForm));
 		};
 		
 		self.event.addEventListener($("tbody td"),"click",callBack);
