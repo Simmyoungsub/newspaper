@@ -55,7 +55,18 @@ public class User {
 	public void setRecommand(int recommand) {
 		this.recommand = recommand;
 	}
-
+	
+	public void upgradeLevel(User user){
+		Level nextLevel = this.level.nextLevel();
+		
+		if(nextLevel == null){
+			throw new IllegalStateException(this.level + "은 업그레이드 불가능합니다.");
+		}
+		else{
+			this.level = nextLevel;
+		}
+	}
+	
 	@Override
 	public String toString() {
 		return "User [userId=" + userId + ", userPwd=" + userPwd + ", userAge=" + userAge + ", level=" + level
