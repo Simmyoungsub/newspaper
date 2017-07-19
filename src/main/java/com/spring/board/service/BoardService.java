@@ -51,6 +51,7 @@ public class BoardService implements BoardServiceIn{
 		return resMap;
 	}
 	
+	@SuppressWarnings("rawtypes")
 	private List call(String query,Map<String,Object> reqMap){
 		
 		try{

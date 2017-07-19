@@ -1,6 +1,7 @@
 package com.spring.board.controller;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -22,6 +23,8 @@ import com.spring.board.BoardConstant;
 import com.spring.board.service.BoardService;
 import com.spring.board.service.Command;
 import com.spring.board.service.LoginService;
+import com.spring.board.service.UserService;
+import com.spring.board.service.dao.User;
 import com.spring.board.util.DateUtil;
 import com.spring.board.util.FileUtil;
 import com.spring.board.util.UUIDUtil;
@@ -35,6 +38,9 @@ public class BoardController {
 	private BoardService boardService;
 	@Autowired
 	private LoginService loginService;
+	@Autowired
+	private UserService userService;
+
 	/**
 	 * 게시판 목록 출력
 	 * @param reqMap
@@ -48,6 +54,31 @@ public class BoardController {
 
 		try{
 			resMap = this.boardService.call(Command.GETLIST, reqMap);
+		}catch(Exception e){
+			throw new RuntimeException();
+		}
+		
+		return resMap;
+	}
+	
+	/**
+	 * 게시판 목록 출력
+	 * @param reqMap
+	 * @return
+	 * @throws RuntimeException
+	 */
+	@RequestMapping(value="/getUserAll.json", method=RequestMethod.POST)
+	@ResponseBody
+	public Map<String,Object> getUserAll(@RequestBody Map<String,Object>reqMap) throws RuntimeException{
+		Map<String,Object> resMap = null;
+
+		try{
+			List<User> users = this.userService.getUserAll();
+			resMap = new HashMap<>();
+			
+			this.userService.update(users.get(0));
+			
+			resMap.put("result", users);
 		}catch(Exception e){
 			throw new RuntimeException();
 		}

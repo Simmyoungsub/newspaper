@@ -58,6 +58,7 @@ public class LoginService {
 		
 		try{
 			HttpSession session = request.getSession();
+			@SuppressWarnings("unchecked")
 			Map<String,Object> userInfo = (Map<String,Object>)session.getAttribute("user");
 			
 			if(userInfo == null){
@@ -92,12 +93,14 @@ public class LoginService {
 	
 	private Map<String,Object> isUser(Map<String,Object> reqMap, String userId, String passWd) throws BoardException{
 		
+		@SuppressWarnings("rawtypes")
 		List userList = (List)(this.boardService.call(Command.GETUSERINFO, reqMap).get("result"));
 		
 		if(userList.isEmpty()){
 			throw new BoardException("존재하지 않는 계정입니다.");
 		}
 		
+		@SuppressWarnings("unchecked")
 		Map<String,Object> user = (Map<String, Object>) userList.get(0);
 		
 		this.logger.info("{}",user);
