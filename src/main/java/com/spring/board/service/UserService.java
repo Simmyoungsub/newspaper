@@ -6,6 +6,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.spring.board.service.dao.Level;
 import com.spring.board.service.dao.User;
@@ -29,6 +30,7 @@ public class UserService {
 		}
 	}
 	
+	@Transactional(readOnly=true)
 	public List<User> getUserAll(){
 		return userDao.getAll();
 	}
@@ -54,6 +56,14 @@ public class UserService {
 	
 	private void upgradeLevel(User user){
 		user.upgradeLevel(user);
-		this.userDao.update(user);
+		//this.userDao.update(user);
+	}
+	
+	public void addUser(User user) {
+		try {
+			this.userDao.addUser(user);
+		}catch(Exception e) {
+			this.logger.info(e.getMessage());
+		}
 	}
 }

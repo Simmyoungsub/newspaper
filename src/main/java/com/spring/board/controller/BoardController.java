@@ -75,9 +75,6 @@ public class BoardController {
 		try{
 			List<User> users = this.userService.getUserAll();
 			resMap = new HashMap<>();
-			
-			this.userService.update(users.get(0));
-			
 			resMap.put("result", users);
 		}catch(Exception e){
 			throw new RuntimeException();

@@ -11,7 +11,8 @@ public enum Command {
 	REGISTERREPLY("registerReply","insert into newspaper.reply (replyValue,boardValue,replyContent,replyWriter) values (:replyValue,:boardValue,:replyContent,:replyWriter)"),
 	GETUSERINFO("getUserInfo","select * from newspaper.user where userId = :userId and userPw = :userPw"),
 	GETUSERALL("getUserAll","select userId, userPwd, userAge, level, login, recommand from newspaper.user"),
-	UPDATEUSERINFO("updateUserInfo","update newspaper.user set userPwd=:userpwd , userAge=:userage, level=:level,recommand=:recommand where userId=:userid");
+	UPDATEUSERINFO("updateUserInfo","update newspaper.user set userPwd=:userpwd , userAge=:userage, level=:level,recommand=:recommand where userId=:userid"),
+	ADDUSER("addUser","insert into newspaper.user (userId,userPwd,userAge) values (:userid,:userpwd,:userage)");
 	
 	private Command(String key, String command){
 		this.key = key;

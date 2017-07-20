@@ -10,6 +10,12 @@ public class User {
 	
 	public User(){}
 	
+	public User(String userId, String userPwd, int userAge){
+		this.userId = userId;
+		this.userPwd = userPwd;
+		this.userAge = userAge;
+	}
+	
 	public User(String userId, String userPwd, int userAge, Level level, int login, int recommand){
 		this.userId = userId;
 		this.userPwd = userPwd;

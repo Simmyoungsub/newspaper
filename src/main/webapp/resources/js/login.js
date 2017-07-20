@@ -10,7 +10,8 @@ var board_login = function(){
 	
 	var $loginBtn = $("#loginBtn"),
 		$userId = $("#userId"),
-		$userPassword = $("#userPassword");
+		$userPassword = $("#userPassword"),
+		$userBtn = $(".userBtn");
 	
 	
 	this.init = function(){
@@ -21,7 +22,28 @@ var board_login = function(){
 		$loginBtn.on("click",function(e){
 			e.preventDefault();
 			login();
-		})
+		});
+		
+		$userBtn.on("click",function(e){
+			e.preventDefault();
+			testCase();
+		});
+	};
+	
+	var testCase = function(){
+		$.ajax({
+			type : "POST",
+			url : "getUserAll.json",
+			data : JSON.stringify({}),
+			contentType : "application/json",
+			dataType : "json",
+			success : function(data){
+				console.log(data);
+			},
+			error : function(xhr){
+				console.log(xhr);
+			}
+		});
 	};
 	
 	var login = function(){

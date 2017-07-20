@@ -67,4 +67,19 @@ public class UserDao {
 		
 		return null;
 	}
+	
+	public void addUser(User user) {
+		
+		SqlParameterSource params = this.setParameter(user);
+		this.addUser(Command.ADDUSER.getCommand(),params);
+		
+	}
+	
+	private void addUser(String query , SqlParameterSource params) {
+		try {
+			this.jdbcTemplate.update(query, params);
+		}catch(Exception e) {
+			this.logger.info(e.getMessage());
+		}
+	}
 }

@@ -25,6 +25,9 @@
                 		<a href="#" class="btn btn-primary">취소</a>
                 	</div>
                 </div>
+                <div>
+                	<a href="#" class="btn btn-primary userBtn">유저</a>
+                </div>
             </div>
        	</div>
 	</div>
